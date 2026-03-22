@@ -13,7 +13,7 @@ Schedule (cron example — runs 7am daily):
   0 7 * * * cd /path/to/cohort-2-day-2 && python generate_brief.py >> brief.log 2>&1
 """
 
-import json, re, sys, argparse, os
+import json, re, sys, argparse, os, urllib.request, urllib.parse
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
@@ -28,64 +28,64 @@ DATA_FILE  = (_site_dir if _site_dir.exists() else SCRIPT_DIR) / "data.json"
 LOG_FILE   = SCRIPT_DIR / "brief.log"
 
 # ─────────────────────────────────────────────────────────────────
-# RSS FEEDS
+# NEWS API
 # ─────────────────────────────────────────────────────────────────
 
-FEEDS = [
-    # Global policy & regulatory bodies
-    {"label": "policy-global", "url": "https://www.bis.org/rss/index.htm"},
-    {"label": "policy-global", "url": "https://www.fsb.org/feed/"},
-    {"label": "research",      "url": "https://www.worldbank.org/en/topic/climatechange/rss.xml"},
-    # Indian financial news (ESG, climate, banking regulation)
-    {"label": "policy-india",  "url": "https://www.business-standard.com/rss/finance-19.rss"},
-    {"label": "policy-india",  "url": "https://economictimes.indiatimes.com/markets/rssfeeds/1977021501.cms"},
-    # Reuters global business / sustainability
-    {"label": "competitors",   "url": "https://feeds.reuters.com/reuters/businessNews"},
-    # Climate & sustainability news
-    {"label": "research",      "url": "https://www.climatechangenews.com/feed/"},
+NEWS_QUERIES = [
+    "RBI OR SEBI OR ISSB OR NGFS OR FSB climate ESG disclosure banks",
+    "Jupiter Intelligence OR First Street OR UpDapt OR Sprih climate ESG risk",
+    "parametric insurance climate OR IFC OR NGFS climate risk report",
 ]
 
-# ─────────────────────────────────────────────────────────────────
-# FETCH RSS
-# ─────────────────────────────────────────────────────────────────
-
-def fetch_feeds(days: int = 7) -> list[dict]:
-    """Fetch all RSS feeds and return items from the last `days` days."""
-    try:
-        import feedparser
-    except ImportError:
-        print("ERROR: 'feedparser' not installed. Run: pip install feedparser", file=sys.stderr)
+def fetch_news(days: int = 30) -> list[dict]:
+    """Fetch articles from NewsAPI.org for curated queries."""
+    api_key = os.environ.get("NEWS_API_KEY")
+    if not api_key:
+        print("ERROR: NEWS_API_KEY not set.", file=sys.stderr)
         sys.exit(1)
 
-    cutoff = datetime.now(timezone.utc) - timedelta(days=days)
+    from_date = (datetime.now(timezone.utc) - timedelta(days=days)).strftime("%Y-%m-%d")
     items = []
 
-    headers = {"User-Agent": "Mozilla/5.0 (compatible; StepChangeBriefBot/1.0)"}
-
-    for feed_def in FEEDS:
+    for query in NEWS_QUERIES:
+        params = urllib.parse.urlencode({
+            "q":        query,
+            "language": "en",
+            "sortBy":   "publishedAt",
+            "pageSize": 20,
+            "from":     from_date,
+            "apiKey":   api_key,
+        })
+        url = f"https://newsapi.org/v2/everything?{params}"
         try:
-            feed = feedparser.parse(feed_def["url"], request_headers=headers)
-            for entry in feed.entries:
-                # Parse published date
-                pub = None
-                if hasattr(entry, "published_parsed") and entry.published_parsed:
-                    pub = datetime(*entry.published_parsed[:6], tzinfo=timezone.utc)
-
-                if pub and pub < cutoff:
-                    continue  # skip items older than cutoff
-
+            req = urllib.request.Request(url, headers={"User-Agent": "StepChangeBriefBot/1.0"})
+            with urllib.request.urlopen(req, timeout=15) as resp:
+                data = json.loads(resp.read())
+            for art in data.get("articles", []):
+                pub_raw = art.get("publishedAt", "")
+                try:
+                    pub = datetime.fromisoformat(pub_raw.replace("Z", "+00:00"))
+                    date_str = pub.strftime("%-d %b %Y")
+                except Exception:
+                    date_str = pub_raw[:10]
                 items.append({
-                    "label":   feed_def["label"],
-                    "title":   entry.get("title", "").strip(),
-                    "url":     entry.get("link", "").strip(),
-                    "source":  entry.get("source", {}).get("title", feed_def["label"]),
-                    "date":    pub.strftime("%-d %b %Y") if pub else "Unknown",
-                    "snippet": entry.get("summary", "")[:300].strip(),
+                    "title":   (art.get("title") or "").strip(),
+                    "url":     (art.get("url") or "").strip(),
+                    "source":  (art.get("source", {}).get("name") or "Unknown"),
+                    "date":    date_str,
+                    "snippet": (art.get("description") or "")[:300].strip(),
                 })
         except Exception as e:
-            print(f"  Warning: could not fetch {feed_def['label']}: {e}", file=sys.stderr)
+            print(f"  Warning: NewsAPI query failed ({query[:40]}...): {e}", file=sys.stderr)
 
-    return items
+    # Deduplicate by URL
+    seen = set()
+    unique = []
+    for item in items:
+        if item["url"] not in seen:
+            seen.add(item["url"])
+            unique.append(item)
+    return unique
 
 # ─────────────────────────────────────────────────────────────────
 # CATEGORIZATION PROMPT
@@ -276,9 +276,9 @@ def main():
     timestamp = now.strftime("%-I:%M %p")
     print(f"[{now.strftime('%Y-%m-%d %H:%M:%S')}] Generating brief...")
 
-    print(f"  Fetching RSS feeds (last {args.days} days)...")
-    items = fetch_feeds(days=args.days)
-    print(f"  Fetched {len(items)} items across {len(FEEDS)} feeds.")
+    print(f"  Fetching news via NewsAPI (last {args.days} days)...")
+    items = fetch_news(days=args.days)
+    print(f"  Fetched {len(items)} articles across {len(NEWS_QUERIES)} queries.")
 
     if not items:
         print("ERROR: No items fetched. Check network access and feed URLs.", file=sys.stderr)
