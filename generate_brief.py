@@ -2,19 +2,19 @@
 """
 StepChange Daily Brief Generator
 ─────────────────────────────────
-Fetches Google News RSS feeds for curated topics, then passes the headlines
-to Claude for categorization. No AI web search — fast and reliable in CI.
+Calls Claude (Anthropic SDK, no tools) to generate a fresh intelligence brief
+from its training knowledge. No external API calls — runs reliably in CI.
 
 Usage:
   python generate_brief.py           # generate and write data.json
   python generate_brief.py --dry-run # print JSON without writing
 
 Schedule (cron example — runs 7am daily):
-  0 7 * * * cd /path/to/cohort-2-day-2 && python generate_brief.py >> brief.log 2>&1
+  0 7 * * * cd /path/to/my-site && python generate_brief.py >> brief.log 2>&1
 """
 
-import json, re, sys, argparse, os, urllib.request, urllib.parse
-from datetime import datetime, timezone, timedelta
+import json, re, sys, argparse, os
+from datetime import datetime
 from pathlib import Path
 
 # ─────────────────────────────────────────────────────────────────
@@ -28,108 +28,62 @@ DATA_FILE  = (_site_dir if _site_dir.exists() else SCRIPT_DIR) / "data.json"
 LOG_FILE   = SCRIPT_DIR / "brief.log"
 
 # ─────────────────────────────────────────────────────────────────
-# COMPOSIO SEARCH
+# BRIEF GENERATION PROMPT
 # ─────────────────────────────────────────────────────────────────
 
-NEWS_QUERIES = [
-    {"query": "RBI SEBI climate risk ESG disclosure India banks",      "when": "m", "gl": "in"},
-    {"query": "ISSB IFRS FSB NGFS BIS climate disclosure banks",       "when": "m", "gl": "us"},
-    {"query": "Jupiter Intelligence First Street UpDapt Sprih climate ESG", "when": "m"},
-    {"query": "parametric insurance climate risk banks",               "when": "m"},
-    {"query": "IFC World Bank NGFS climate risk report emerging markets", "when": "m"},
-]
-
-def fetch_news(days: int = 30) -> list[dict]:
-    """Fetch news articles via Composio COMPOSIO_SEARCH_NEWS."""
-    api_key = os.environ.get("COMPOSIO_API_KEY")
-    if not api_key:
-        print("ERROR: COMPOSIO_API_KEY not set.", file=sys.stderr)
-        sys.exit(1)
-
-    try:
-        from composio import ComposioToolSet
-    except ImportError:
-        print("ERROR: 'composio-core' not installed. Run: pip install composio-core", file=sys.stderr)
-        sys.exit(1)
-
-    toolset = ComposioToolSet(api_key=api_key)
-    items = []
-
-    for q in NEWS_QUERIES:
-        try:
-            result = toolset.execute_action(
-                action="COMPOSIO_SEARCH_NEWS",
-                params=q,
-            )
-            articles = []
-            # Handle different response shapes
-            if isinstance(result, dict):
-                articles = result.get("data", result.get("results", result.get("articles", [])))
-            elif isinstance(result, list):
-                articles = result
-
-            for art in articles:
-                if not isinstance(art, dict):
-                    continue
-                items.append({
-                    "title":   (art.get("title") or "").strip(),
-                    "url":     (art.get("link") or art.get("url") or "").strip(),
-                    "source":  (art.get("source") or "Unknown"),
-                    "date":    (art.get("published_at") or art.get("date") or "")[:10],
-                    "snippet": (art.get("snippet") or art.get("description") or "")[:300].strip(),
-                })
-        except Exception as e:
-            print(f"  Warning: Composio query failed ({q['query'][:40]}...): {e}", file=sys.stderr)
-
-    # Deduplicate by URL
-    seen, unique = set(), []
-    for item in items:
-        if item["url"] and item["url"] not in seen:
-            seen.add(item["url"])
-            unique.append(item)
-    return unique
-
-# ─────────────────────────────────────────────────────────────────
-# CATEGORIZATION PROMPT
-# ─────────────────────────────────────────────────────────────────
-
-CATEGORIZE_PROMPT = """You are a research analyst for StepChange — a climate risk and ESG intelligence company
+BRIEF_PROMPT = """You are a research analyst for StepChange — a climate risk and ESG intelligence company
 serving Indian financial institutions (banks, NBFCs, enterprises). StepChange's three
 strategic bets are:
   1. Climate risk intelligence for banks (PD/LGD modelling from physical hazard data)
   2. Parametric insurance (helping banks design climate peril-based products)
   3. Global south sustainability data (proprietary ESG datasets for emerging markets)
 
-Below are recent news items fetched from Google News RSS feeds. Categorize the most relevant
-ones into the brief JSON schema below.
+Today's date: {today}
 
-ITEMS:
-{items_text}
+Generate a daily intelligence brief covering recent developments (last 30–60 days) in:
+
+POLICY RADAR — regulatory and policy updates relevant to:
+- Indian regulators: RBI climate risk guidelines, SEBI BRSR updates, IRDAI parametric insurance
+- Global standards: ISSB/IFRS S2, TCFD, EU SFDR, EU Taxonomy, CSRD, Basel climate risk
+- Green finance bodies: BIS, FSB, NGFS, IOSCO
+
+COMPETITOR WATCH — recent fundraises, partnerships, or product launches for:
+- India ESG & climate: UpDapt, Sprih, GIST Advisory, Enture, Greenizon, CarbonMint
+- Global climate risk: Jupiter Intelligence, First Street Foundation, Cervest, Sust Global, XDI
+- Global ESG platforms: Measurabl, Watershed, Persefoni, Sweep, Manifest Climate
+- FI data & ratings: MSCI ESG, Sustainalytics, Moody's ESG, S&P Trucost, Bloomberg ESG
+
+RESEARCH & REPORTS — new publications from:
+IFC, World Bank, Swiss Re, Munich Re, IPCC, UNEPFI, NGFS, BIS, RBI, CPI, FSB, CRISIL
+
+OUR READ — a sharp, opinionated synthesis of what today's combined signals mean for StepChange.
 
 INSTRUCTIONS:
-- Pick up to 6 items per category. Fewer is fine if fewer are relevant.
-- Only include items genuinely relevant to StepChange's context.
-- Use the exact titles and URLs from the items above — do not invent or modify them.
-- For description, write 1-2 factual sentences expanding on the headline.
-- Sort newest first within each category.
+- Return up to 6 items per category, sorted newest first. Fewer is fine.
+- Use real publication titles, real institution names, and real approximate dates.
+- For URLs: use the real URL if you know it with high confidence, otherwise use the institution's
+  homepage (e.g. https://www.rbi.org.in for RBI items, https://www.fsb.org for FSB items).
+  Never construct or guess article-level URLs — homepage is safer than a fabricated path.
+- Write 1-2 factual sentences per item description. Be specific: thresholds, timelines, findings.
+- ourRead must reference specific items from the other three categories. Be direct and opinionated.
 
 Respond with ONLY valid JSON. No preamble, no explanation, no markdown fences.
 
 {{
   "meta": {{
-    "generatedAt": "<ISO 8601 datetime>",
-    "lastUpdated": "<H:MM AM/PM>"
+    "generatedAt": "{today}T00:00:00",
+    "lastUpdated": "{time_str}"
   }},
   "policy": [
     {{
       "id": "policy-1",
       "area": "<human-readable area>",
       "areaSlug": "<esg|climate|carbon|parametric>",
-      "title": "<title from items>",
+      "title": "<title>",
       "description": "<1-2 factual sentences>",
-      "source": "<source from items>",
-      "date": "<date from items>",
-      "url": "<url from items>"
+      "source": "<institution name>",
+      "date": "<DD Mon YYYY>",
+      "url": "<real URL or institution homepage>"
     }}
   ],
   "competitors": [
@@ -138,10 +92,10 @@ Respond with ONLY valid JSON. No preamble, no explanation, no markdown fences.
       "company": "<company name>",
       "category": "<India ESG|Global Climate Risk|Global ESG|FI Data>",
       "tags": ["<Fundraise|Partnerships|Product>"],
-      "title": "<title from items>",
+      "title": "<headline of the development>",
       "description": "<1-2 factual sentences>",
-      "date": "<date from items>",
-      "url": "<url from items>"
+      "date": "<DD Mon YYYY>",
+      "url": "<real URL or company homepage>"
     }}
   ],
   "research": [
@@ -149,17 +103,17 @@ Respond with ONLY valid JSON. No preamble, no explanation, no markdown fences.
       "id": "research-1",
       "bet": "<Climate Risk for Banks|Parametric Insurance|Global South Data>",
       "betSlug": "<climate|parametric|global-south>",
-      "title": "<title from items>",
-      "source": "<source from items>",
-      "date": "<date from items>",
-      "description": "<1-2 factual sentences>",
-      "url": "<url from items>"
+      "title": "<report title>",
+      "source": "<publishing institution>",
+      "date": "<Mon YYYY>",
+      "description": "<1-2 factual sentences with specific findings>",
+      "url": "<real URL or institution homepage>"
     }}
   ],
   "ourRead": {{
     "headline": "<A single sharp insight sentence interpreting today's combined signals>",
     "body": [
-      "<Opening paragraph: dominant theme across all signals today.>",
+      "<Opening paragraph: dominant theme across all signals.>",
       "<Paragraph on the most important policy signal and what it means for StepChange.>",
       "<Paragraph on the most important competitor signal and StepChange's positioning.>",
       "<Paragraph on the most important research signal and how StepChange should use it.>",
@@ -172,21 +126,15 @@ Respond with ONLY valid JSON. No preamble, no explanation, no markdown fences.
 # CLAUDE CALLER
 # ─────────────────────────────────────────────────────────────────
 
-def run_claude(items: list[dict]) -> str:
-    """Pass fetched items to Claude for categorization. Single API call, no tools."""
+def generate_brief(today: str, time_str: str) -> str:
+    """Call Claude to generate the brief from knowledge. Single API call, no tools."""
     try:
         import anthropic
     except ImportError:
         print("ERROR: 'anthropic' not installed. Run: pip install anthropic", file=sys.stderr)
         sys.exit(1)
 
-    # Format items as plain text for the prompt
-    items_text = "\n".join(
-        f"[{i+1}] {item['date']} | {item['source']}\n  Title: {item['title']}\n  URL: {item['url']}\n  Snippet: {item['snippet']}"
-        for i, item in enumerate(items)
-    )
-
-    prompt = CATEGORIZE_PROMPT.format(items_text=items_text)
+    prompt = BRIEF_PROMPT.format(today=today, time_str=time_str)
 
     try:
         client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
@@ -249,7 +197,7 @@ def validate(data: dict) -> list[str]:
             warnings.append(f"'{section}' is not a list")
             continue
         if len(items) == 0:
-            warnings.append(f"'{section}' has 0 items — may indicate search failure")
+            warnings.append(f"'{section}' has 0 items")
         for i, item in enumerate(items):
             if not item.get("url") or item["url"] in ("#", ""):
                 warnings.append(f"{section}[{i}] has no URL: {item.get('title','(no title)')}")
@@ -271,23 +219,15 @@ def validate(data: dict) -> list[str]:
 def main():
     parser = argparse.ArgumentParser(description="Generate StepChange Daily Brief data.json")
     parser.add_argument("--dry-run", action="store_true", help="Print JSON without writing to file")
-    parser.add_argument("--days", type=int, default=30, help="How many days back to fetch news (default: 30)")
     args = parser.parse_args()
 
     now = datetime.now()
-    timestamp = now.strftime("%-I:%M %p")
+    today = now.strftime("%Y-%m-%d")
+    time_str = now.strftime("%-I:%M %p")
     print(f"[{now.strftime('%Y-%m-%d %H:%M:%S')}] Generating brief...")
 
-    print(f"  Fetching news via NewsAPI (last {args.days} days)...")
-    items = fetch_news(days=args.days)
-    print(f"  Fetched {len(items)} articles across {len(NEWS_QUERIES)} queries.")
-
-    if not items:
-        print("ERROR: No items fetched. Check network access and feed URLs.", file=sys.stderr)
-        sys.exit(1)
-
-    print("  Calling Claude to categorize...")
-    raw = run_claude(items)
+    print("  Calling Claude to generate brief from knowledge...")
+    raw = generate_brief(today=today, time_str=time_str)
 
     print("  Extracting JSON from response...")
     data = extract_json(raw)
@@ -303,7 +243,7 @@ def main():
         data["meta"] = {}
     data["meta"]["generatedAt"] = now.isoformat()
     if "lastUpdated" not in data["meta"]:
-        data["meta"]["lastUpdated"] = timestamp
+        data["meta"]["lastUpdated"] = time_str
 
     # Validate
     warnings = validate(data)
