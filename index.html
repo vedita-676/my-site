@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StepChange Daily Brief — 22 March 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════ HEADER -->
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <div class="header-brand">
+        <span class="brand-wordmark">StepChange</span>
+        <span class="brand-rule">—</span>
+        <span class="brand-title">Daily Brief</span>
+      </div>
+      <div class="header-meta">
+        <span class="meta-date" id="briefDate">Sunday, 22 March 2026</span>
+        <span class="meta-dot">·</span>
+        <span class="meta-time">Last updated 7:42 AM</span>
+      </div>
+      <nav class="header-actions">
+        <button class="btn btn-queue" id="headerQueueBtn">
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M9.5 2L14 6.5L11 9.5L8 8L5 13L3 11L8 8L6.5 5L9.5 2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" class="pin-path"/>
+          </svg>
+          Research Queue
+          <span class="queue-badge" id="queueBadge">0</span>
+        </button>
+        <button class="btn btn-primary" id="headerSendBtn">Copy link</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════ HERO -->
+  <section class="hero">
+    <div class="container">
+      <p class="hero-lead">The daily market brief for StepChange.</p>
+      <p class="hero-sub">Policy shifts. Competitor moves. Research that matters. One place, every morning.</p>
+    </div>
+  </section>
+
+  <div class="section-rule"></div>
+
+  <!-- ═══════════════════════════════════════ ABOUT -->
+  <section class="about">
+    <div class="container">
+      <p class="about-body">The climate-finance space moves fast. Regulation drops quietly. Competitors close rounds. Reports reframe the category. The signal exists — it's just buried. StepChange Daily Brief surfaces what matters: policy developments, competitor intelligence, and research relevant to our bets — filtered, curated, and updated every morning. Four sections. One question: what changed in the last 24 hours that StepChange needs to know?</p>
+    </div>
+  </section>
+
+  <div class="section-rule"></div>
+
+  <!-- ═══════════════════════════════════════ MAIN TABS -->
+  <main class="main-content">
+    <div class="container">
+
+      <div class="tabs" role="tablist" aria-label="Brief sections">
+        <button class="tab active" data-tab="policy" role="tab" aria-selected="true" aria-controls="panel-policy">Policy Radar</button>
+        <button class="tab" data-tab="competitors" role="tab" aria-selected="false" aria-controls="panel-competitors">Competitor Watch</button>
+        <button class="tab" data-tab="research" role="tab" aria-selected="false" aria-controls="panel-research">Research &amp; Reports</button>
+        <button class="tab" data-tab="our-read" role="tab" aria-selected="false" aria-controls="panel-our-read">Our Read</button>
+      </div>
+
+      <div class="tab-desc-bar">
+        <p class="tab-desc active" data-for="policy">RBI, SEBI, TCFD, BRSR, EU SFDR — tracked daily. Only what directly affects ESG reporting, carbon accounting, climate risk disclosure, or parametric insurance makes it in.</p>
+        <p class="tab-desc" data-for="competitors">India ESG players, global sustainability platforms, climate risk providers, and FI data incumbents. Tagged by what changed — fundraise, partnerships, or product.</p>
+        <p class="tab-desc" data-for="research">Publications from IPCC, IFC, World Bank, central banks, and major consultancies — filtered for StepChange's three bets: climate risk for banks, parametric insurance, and global south sustainability data.</p>
+        <p class="tab-desc" data-for="our-read">A daily synthesis — not a summary. What today's signals mean for StepChange's positioning, what's noise, and what the team needs to be across.</p>
+      </div>
+
+      <!-- POLICY RADAR -->
+      <div class="tab-panel active" id="panel-policy" role="tabpanel">
+        <div class="cards-grid" id="policy-cards"><div class="cards-loading">Searching for today's policy updates…</div></div>
+      </div>
+
+      <!-- COMPETITOR WATCH -->
+      <div class="tab-panel" id="panel-competitors" role="tabpanel">
+        <div class="cards-grid" id="competitor-cards"><div class="cards-loading">Searching competitor signals…</div></div>
+      </div>
+
+      <!-- RESEARCH & REPORTS -->
+      <div class="tab-panel" id="panel-research" role="tabpanel">
+        <div class="cards-grid" id="research-cards"><div class="cards-loading">Searching research & reports…</div></div>
+      </div>
+
+      <!-- OUR READ -->
+      <div class="tab-panel" id="panel-our-read" role="tabpanel">
+        <article class="our-read">
+          <header class="our-read-header">
+            <span class="our-read-byline" id="ourReadByline">StepChange Intelligence</span>
+            <button class="pin-btn" id="ourReadPin" data-id="our-read-today" data-title="Our Read" data-source="StepChange Intelligence" title="Pin to Research Queue">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M9.5 2L14 6.5L11 9.5L8 8L5 13L3 11L8 8L6.5 5L9.5 2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" class="pin-path"/>
+              </svg>
+            </button>
+          </header>
+          <h2 class="our-read-headline" id="ourReadHeadline">Loading today's read…</h2>
+          <div class="our-read-body" id="ourReadBody">
+            <p class="cards-loading" style="font-style:normal;">Generating synthesis…</p>
+          </div>
+          <footer class="our-read-footer">
+            <span>For internal distribution only.</span>
+          </footer>
+        </article>
+      </div>
+
+    </div>
+  </main>
+
+  <div class="section-rule"></div>
+
+  <!-- ═══════════════════════════════════════ RESEARCH QUEUE SECTION -->
+  <section class="queue-section">
+    <div class="container queue-inner">
+      <div class="queue-info">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M9.5 2L14 6.5L11 9.5L8 8L5 13L3 11L8 8L6.5 5L9.5 2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+        </svg>
+        <div>
+          <h3 class="queue-label">Research Queue</h3>
+          <p class="queue-body">Pin anything worth going deeper on. It collects here until you're ready — for a memo, a briefing, or a proper think-through. Nothing expires.</p>
+        </div>
+      </div>
+      <button class="btn btn-queue-cta" id="sectionQueueBtn">
+        View Research Queue <span class="queue-inline-count" id="queueInlineCount">· 0 pinned</span> →
+      </button>
+    </div>
+  </section>
+
+  <div class="section-rule"></div>
+
+  <!-- ═══════════════════════════════════════ SHARE SECTION -->
+  <section class="send-section">
+    <div class="container send-inner">
+      <div class="send-info">
+        <h3 class="send-label">Share today's brief</h3>
+        <p class="send-body">Copy a link to this brief and paste it wherever it's useful — Slack, email, WhatsApp. The recipient sees exactly what you see.</p>
+      </div>
+      <div class="send-form">
+        <button class="btn btn-primary" id="inlineCopyBtn">Copy link →</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-rule"></div>
+
+  <!-- ═══════════════════════════════════════ FEEDBACK SECTION -->
+  <section class="feedback-section">
+    <div class="container feedback-inner">
+      <div class="feedback-info">
+        <h3 class="feedback-label">Something missing from coverage?</h3>
+        <p class="feedback-body">A competitor, source, or policy area that should be tracked?</p>
+      </div>
+      <div class="feedback-form">
+        <textarea class="form-input form-textarea" placeholder="What should this brief be covering that it isn't?" rows="2" id="feedbackInput"></textarea>
+        <button class="btn btn-outline" id="feedbackSubmit">Submit →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span class="footer-left">StepChange Daily Brief</span>
+      <span class="footer-sep">·</span>
+      <span class="footer-right">Internal distribution only · 22 March 2026</span>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════ MODALS -->
+
+  <!-- Research Queue Modal -->
+  <div class="modal-overlay" id="queueModal" role="dialog" aria-modal="true" aria-label="Research Queue">
+    <div class="modal">
+      <div class="modal-head">
+        <h3 class="modal-title">Research Queue</h3>
+        <button class="modal-close" id="closeQueueModal" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body" id="queueModalBody">
+        <p class="queue-empty">Nothing pinned yet. Hit the pin icon on any card to add it here.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Share Modal -->
+  <div class="modal-overlay" id="sendModal" role="dialog" aria-modal="true" aria-label="Share Brief">
+    <div class="modal">
+      <div class="modal-head">
+        <h3 class="modal-title">Share today's brief</h3>
+        <button class="modal-close" id="closeSendModal" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-desc">Copy the link below and share it wherever it's useful — Slack, email, WhatsApp. The recipient sees exactly what you see.</p>
+        <div class="modal-send-form">
+          <input type="text" class="form-input" id="shareLinkInput" readonly>
+          <button class="btn btn-primary" id="modalCopyBtn">Copy link →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast" role="status" aria-live="assertive" aria-atomic="true"></div>
+
+  <!-- ═══════════════════════════════════════ SCRIPT -->
+  <script>
+
+  // ─────────────────────────────────────────
+  // DATA
+  // ─────────────────────────────────────────
+
+  // ─────────────────────────────────────────
+  // DATA LOADING
+  // ─────────────────────────────────────────
+
+  async function loadBriefData() {
+    try {
+      const res = await fetch('data.json?v=' + Date.now());
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      renderFromData(data);
+    } catch (err) {
+      showLoadError(err);
+    }
+  }
+
+  function renderFromData(data) {
+    // Cards
+    const policyEl     = document.getElementById('policy-cards');
+    const competitorEl = document.getElementById('competitor-cards');
+    const researchEl   = document.getElementById('research-cards');
+
+    policyEl.innerHTML     = (data.policy     || []).map(renderPolicy).join('')     || '<div class="cards-empty">No policy updates found today.</div>';
+    competitorEl.innerHTML = (data.competitors || []).map(renderCompetitor).join('') || '<div class="cards-empty">No competitor signals found today.</div>';
+    researchEl.innerHTML   = (data.research    || []).map(renderResearch).join('')   || '<div class="cards-empty">No new research found today.</div>';
+
+    // Our Read
+    const ourRead = data.ourRead || {};
+    const dateStr = data.meta?.lastUpdated
+      ? `StepChange Intelligence · ${new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}`
+      : 'StepChange Intelligence';
+    document.getElementById('ourReadByline').textContent  = dateStr;
+    document.getElementById('ourReadHeadline').textContent = ourRead.headline || '—';
+    document.getElementById('ourReadBody').innerHTML =
+      (ourRead.body || []).map(p => `<p>${p}</p>`).join('') ||
+      '<p class="cards-empty">No synthesis available.</p>';
+
+    // Update Our Read pin button with today's date-based ID
+    const todayId = 'our-read-' + new Date().toISOString().slice(0, 10).replace(/-/g, '');
+    const pin = document.getElementById('ourReadPin');
+    if (pin) {
+      pin.dataset.id    = todayId;
+      pin.dataset.title = `Our Read: ${new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}`;
+      pin.classList.toggle('active', pinnedItems.has(todayId));
+    }
+
+    // Update last-updated time in header
+    if (data.meta?.lastUpdated) {
+      const timeEl = document.querySelector('.meta-time');
+      if (timeEl) timeEl.textContent = `Last updated ${data.meta.lastUpdated}`;
+    }
+  }
+
+  function showLoadError(err) {
+    const msg = `<div class="cards-error">Could not load brief data.<br><span>Run <code>python generate_brief.py</code> to generate it.</span><br><small>${err.message}</small></div>`;
+    ['policy-cards', 'competitor-cards', 'research-cards'].forEach(id => {
+      document.getElementById(id).innerHTML = msg;
+    });
+    document.getElementById('ourReadHeadline').textContent = 'Brief not generated yet.';
+    document.getElementById('ourReadBody').innerHTML = `<p class="cards-error-text">Run <code>python generate_brief.py</code> in the project directory to generate today's brief.</p>`;
+  }
+
+  // ─────────────────────────────────────────
+  // LEGACY STATIC DATA (fallback / dev reference)
+  // ─────────────────────────────────────────
+
+  const POLICY_CARDS = [
+    {
+      id: 'policy-1',
+      area: 'ESG Reporting',
+      areaSlug: 'esg',
+      title: 'SEBI tightens BRSR Core mandatory disclosures for top 150 listed entities',
+      description: 'Circular mandates third-party assurance for all BRSR Core KPIs from FY2026–27. Timeline accelerated from earlier 2028 guidance.',
+      source: 'SEBI Circular',
+      date: '21 Mar 2026',
+      url: 'https://www.sebi.gov.in/legal/circulars/mar-2026/circular-on-brsr-core-disclosures_91234.html'
+    },
+    {
+      id: 'policy-2',
+      area: 'Climate Risk',
+      areaSlug: 'climate',
+      title: 'RBI publishes draft framework on climate-related financial disclosures for scheduled commercial banks',
+      description: 'Aligns with TCFD recommendations. Banks with balance sheets above ₹1,000 Cr required to publish Climate Risk Reports annually from FY2027.',
+      source: 'RBI Draft Guidelines',
+      date: '20 Mar 2026',
+      url: 'https://www.rbi.org.in/Scripts/PublicationsView.aspx?id=22891'
+    },
+    {
+      id: 'policy-3',
+      area: 'Carbon Accounting',
+      areaSlug: 'carbon',
+      title: 'EU SFDR Level 2 amendments expand mandatory PAI indicators to include physical risk metrics',
+      description: 'New principal adverse impact indicators require European funds to disclose portfolio exposure to acute and chronic physical climate risks.',
+      source: 'European Commission',
+      date: '18 Mar 2026',
+      url: 'https://finance.ec.europa.eu/sustainable-finance/disclosures/sustainable-finance-disclosure-regulation-sfdr_en'
+    }
+  ];
+
+  const COMPETITOR_CARDS = [
+    {
+      id: 'comp-1',
+      company: 'UpDapt',
+      category: 'India ESG',
+      tags: ['Fundraise'],
+      title: 'Raises ₹48 Cr Series B led by Climate Angels Network',
+      description: 'Round includes strategic participation from Axis Bank\'s corporate venture arm. Stated use: expanding FI-specific ESG modules.',
+      date: '21 Mar 2026',
+      url: 'https://updapt.com/'
+    },
+    {
+      id: 'comp-2',
+      company: 'Sprih',
+      category: 'India ESG',
+      tags: ['Partnerships'],
+      title: 'Partners with HDFC Bank for enterprise Scope 3 value chain reporting',
+      description: '12-month deployment covering 200+ HDFC supplier entities. First major bank-level Scope 3 implementation announced in India.',
+      date: '20 Mar 2026',
+      url: 'https://sprih.com/'
+    },
+    {
+      id: 'comp-3',
+      company: 'Jupiter Intelligence',
+      category: 'Global Climate Risk',
+      tags: ['Product'],
+      title: 'Expands physical risk coverage to 14 South and Southeast Asian markets',
+      description: 'New climate hazard models for flood, heat stress, and cyclone across India, Bangladesh, and Vietnam. Targeting insurance and infrastructure verticals.',
+      date: '19 Mar 2026',
+      url: 'https://jupiterintel.com/'
+    },
+    {
+      id: 'comp-4',
+      company: 'GIST Advisory',
+      category: 'India ESG',
+      tags: ['Product'],
+      title: 'Launches NBFC-specific climate risk scoring module',
+      description: 'First India-focused product targeting NBFCs rather than scheduled commercial banks. SaaS per-portfolio pricing model.',
+      date: '18 Mar 2026',
+      url: 'https://gistadvisory.com/'
+    },
+    {
+      id: 'comp-5',
+      company: 'First Street',
+      category: 'Global Climate Risk',
+      tags: ['Fundraise'],
+      title: 'Closes $30M Series C for sovereign and sub-sovereign risk modelling expansion',
+      description: 'New funding targets municipal bond and sovereign debt risk applications. No India-specific commercial announcements.',
+      date: '17 Mar 2026',
+      url: 'https://firststreet.org/'
+    }
+  ];
+
+  const RESEARCH_CARDS = [
+    {
+      id: 'research-1',
+      bet: 'Climate Risk for Banks',
+      betSlug: 'climate',
+      title: 'Climate-Related Credit Risk in South Asian Banking: A Stress-Testing Framework',
+      source: 'IFC / World Bank Group',
+      date: 'March 2026',
+      description: 'First IFC framework explicitly mapping physical climate hazards to PD/LGD parameters for South Asian banks. Directly validates StepChange\'s climate risk modelling approach.',
+      url: 'https://www.ifc.org/en/insights-reports/2026/climate-credit-risk-south-asia'
+    },
+    {
+      id: 'research-2',
+      bet: 'Parametric Insurance',
+      betSlug: 'parametric',
+      title: 'Parametric Insurance Uptake in Emerging Markets: Barriers and Catalysts',
+      source: 'Swiss Re Institute',
+      date: 'March 2026',
+      description: 'Survey of 340 financial institutions across 18 emerging markets. Identifies bank-intermediated parametric products as the highest-growth segment. Key section on India on pg. 34.',
+      url: 'https://www.swissre.com/institute/research/topics-and-risk-dialogues/climate-and-natural-catastrophe-risk/'
+    },
+    {
+      id: 'research-3',
+      bet: 'Global South Data',
+      betSlug: 'global-south',
+      title: 'Filling the Gaps: Sustainability Data Infrastructure for the Global South',
+      source: 'UN Environment Programme Finance Initiative',
+      date: 'February 2026',
+      description: 'Maps current coverage gaps in ESG data across South Asia, Sub-Saharan Africa, and Latin America. Estimates $2.1B market for proprietary sustainability datasets by 2030.',
+      url: 'https://www.unepfi.org/publications/'
+    }
+  ];
+
+  // ─────────────────────────────────────────
+  // STATE
+  // ─────────────────────────────────────────
+
+  let pinnedItems = new Map();
+
+  function loadPinned() {
+    try {
+      const stored = localStorage.getItem('sc-brief-pinned');
+      if (stored) pinnedItems = new Map(JSON.parse(stored));
+    } catch(e) { pinnedItems = new Map(); }
+  }
+
+  function savePinned() {
+    try { localStorage.setItem('sc-brief-pinned', JSON.stringify([...pinnedItems])); } catch(e) {}
+  }
+
+  // ─────────────────────────────────────────
+  // HELPERS
+  // ─────────────────────────────────────────
+
+  function esc(str) {
+    return str.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  const PIN_SVG = `<svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M9.5 2L14 6.5L11 9.5L8 8L5 13L3 11L8 8L6.5 5L9.5 2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" class="pin-path"/></svg>`;
+
+  // ─────────────────────────────────────────
+  // CARD RENDERERS
+  // ─────────────────────────────────────────
+
+  function renderPolicy(card) {
+    const pinned = pinnedItems.has(card.id);
+    return `
+      <article class="card${pinned ? ' pinned' : ''}" data-id="${card.id}">
+        <div class="card-top">
+          <span class="tag tag-${card.areaSlug}">${card.area}</span>
+          <button class="pin-btn${pinned ? ' active' : ''}" data-id="${card.id}" data-title="${esc(card.title)}" data-source="${esc(card.source)}" title="Pin to Research Queue">${PIN_SVG}</button>
+        </div>
+        <h3 class="card-title"><a href="${card.url}" target="_blank" rel="noopener noreferrer">${card.title}</a></h3>
+        <p class="card-desc">${card.description}</p>
+        <footer class="card-foot">
+          <span class="card-source">${card.source}</span>
+          <span class="card-date">${card.date}</span>
+        </footer>
+      </article>`;
+  }
+
+  function renderCompetitor(card) {
+    const pinned = pinnedItems.has(card.id);
+    const tagsHtml = card.tags.map(t => `<span class="tag tag-${t.toLowerCase()}">${t}</span>`).join('');
+    return `
+      <article class="card${pinned ? ' pinned' : ''}" data-id="${card.id}">
+        <div class="card-top">
+          <div class="card-company">
+            <span class="company-name">${card.company}</span>
+            <span class="company-cat">${card.category}</span>
+          </div>
+          <button class="pin-btn${pinned ? ' active' : ''}" data-id="${card.id}" data-title="${esc(card.company + ': ' + card.title)}" data-source="${esc(card.category)}" title="Pin to Research Queue">${PIN_SVG}</button>
+        </div>
+        <div class="card-tags">${tagsHtml}</div>
+        <h3 class="card-title"><a href="${card.url}" target="_blank" rel="noopener noreferrer">${card.title}</a></h3>
+        <p class="card-desc">${card.description}</p>
+        <footer class="card-foot">
+          <span class="card-date">${card.date}</span>
+        </footer>
+      </article>`;
+  }
+
+  function renderResearch(card) {
+    const pinned = pinnedItems.has(card.id);
+    return `
+      <article class="card${pinned ? ' pinned' : ''}" data-id="${card.id}">
+        <div class="card-top">
+          <span class="tag tag-bet-${card.betSlug}">${card.bet}</span>
+          <button class="pin-btn${pinned ? ' active' : ''}" data-id="${card.id}" data-title="${esc(card.title)}" data-source="${esc(card.source)}" title="Pin to Research Queue">${PIN_SVG}</button>
+        </div>
+        <h3 class="card-title"><a href="${card.url}" target="_blank" rel="noopener noreferrer">${card.title}</a></h3>
+        <p class="card-desc">${card.description}</p>
+        <footer class="card-foot">
+          <span class="card-source">${card.source}</span>
+          <span class="card-date">${card.date}</span>
+        </footer>
+      </article>`;
+  }
+
+  function renderAllCards() {
+    // Used as a static fallback when data.json is unavailable (e.g., local dev without running the generator)
+    document.getElementById('policy-cards').innerHTML     = POLICY_CARDS.map(renderPolicy).join('');
+    document.getElementById('competitor-cards').innerHTML = COMPETITOR_CARDS.map(renderCompetitor).join('');
+    document.getElementById('research-cards').innerHTML   = RESEARCH_CARDS.map(renderResearch).join('');
+  }
+
+  // ─────────────────────────────────────────
+  // PIN TOGGLE
+  // ─────────────────────────────────────────
+
+  function togglePin(id, title, source) {
+    if (pinnedItems.has(id)) {
+      pinnedItems.delete(id);
+      toast('Removed from Research Queue');
+    } else {
+      pinnedItems.set(id, { title, source });
+      toast('Added to Research Queue');
+    }
+    savePinned();
+    updateQueueCount();
+
+    document.querySelectorAll(`.pin-btn[data-id="${id}"]`).forEach(b => b.classList.toggle('active', pinnedItems.has(id)));
+    document.querySelectorAll(`.card[data-id="${id}"]`).forEach(c => c.classList.toggle('pinned', pinnedItems.has(id)));
+
+    if (document.getElementById('queueModal').classList.contains('active')) renderQueueModal();
+  }
+
+  // ─────────────────────────────────────────
+  // QUEUE COUNT
+  // ─────────────────────────────────────────
+
+  function updateQueueCount() {
+    const n = pinnedItems.size;
+    const badge = document.getElementById('queueBadge');
+    badge.textContent = n;
+    badge.classList.toggle('visible', n > 0);
+    const inline = document.getElementById('queueInlineCount');
+    inline.textContent = `· ${n} pinned`;
+    inline.classList.toggle('has-items', n > 0);
+  }
+
+  // ─────────────────────────────────────────
+  // QUEUE MODAL CONTENT
+  // ─────────────────────────────────────────
+
+  function renderQueueModal() {
+    const body = document.getElementById('queueModalBody');
+    if (pinnedItems.size === 0) {
+      body.innerHTML = '<p class="queue-empty">Nothing pinned yet. Hit the pin icon on any card to add it here.</p>';
+      return;
+    }
+    body.innerHTML = [...pinnedItems.entries()].map(([id, item]) => `
+      <div class="queue-item">
+        <div class="queue-item-info">
+          <p class="queue-item-title">${item.title}</p>
+          <span class="queue-item-source">${item.source}</span>
+        </div>
+        <button class="queue-item-remove" data-id="${id}" title="Remove">✕</button>
+      </div>`).join('');
+  }
+
+  // ─────────────────────────────────────────
+  // MODALS
+  // ─────────────────────────────────────────
+
+  function openModal(id) {
+    document.getElementById(id).classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(id) {
+    document.getElementById(id).classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // ─────────────────────────────────────────
+  // TABS
+  // ─────────────────────────────────────────
+
+  function switchTab(name) {
+    document.querySelectorAll('.tab').forEach(t => {
+      const active = t.dataset.tab === name;
+      t.classList.toggle('active', active);
+      t.setAttribute('aria-selected', active);
+    });
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.toggle('active', p.id === `panel-${name}`));
+    document.querySelectorAll('.tab-desc').forEach(d => d.classList.toggle('active', d.dataset.for === name));
+  }
+
+  // ─────────────────────────────────────────
+  // TOAST
+  // ─────────────────────────────────────────
+
+  let toastTimer;
+  function toast(msg) {
+    const el = document.getElementById('toast');
+    el.textContent = msg;
+    el.classList.add('visible');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => el.classList.remove('visible'), 2400);
+  }
+
+  // ─────────────────────────────────────────
+  // COPY LINK
+  // ─────────────────────────────────────────
+
+  function copyBriefLink(closeModalId) {
+    const url = window.location.href;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(() => {
+        toast('Link copied to clipboard');
+        if (closeModalId) closeModal(closeModalId);
+      }).catch(() => fallbackCopy(url, closeModalId));
+    } else {
+      fallbackCopy(url, closeModalId);
+    }
+  }
+
+  function fallbackCopy(text, closeModalId) {
+    const el = document.createElement('textarea');
+    el.value = text;
+    el.style.position = 'fixed';
+    el.style.opacity = '0';
+    document.body.appendChild(el);
+    el.select();
+    try {
+      document.execCommand('copy');
+      toast('Link copied to clipboard');
+      if (closeModalId) closeModal(closeModalId);
+    } catch(e) {
+      toast('Copy the link from your address bar');
+    }
+    document.body.removeChild(el);
+  }
+
+  // ─────────────────────────────────────────
+  // DYNAMIC DATE
+  // ─────────────────────────────────────────
+
+  function renderDate() {
+    const now = new Date();
+    const dateStr = now.toLocaleDateString('en-GB', {
+      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+    });
+    const el = document.getElementById('briefDate');
+    if (el) el.textContent = dateStr;
+    // Update page title
+    const shortDate = now.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+    document.title = `StepChange Daily Brief — ${shortDate}`;
+  }
+
+  // ─────────────────────────────────────────
+  // EVENT LISTENERS
+  // ─────────────────────────────────────────
+
+  // Tabs
+  document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => switchTab(t.dataset.tab)));
+
+  // Delegated click handler
+  document.addEventListener('click', e => {
+
+    // Pin buttons
+    const pinBtn = e.target.closest('.pin-btn');
+    if (pinBtn) {
+      e.preventDefault();
+      togglePin(pinBtn.dataset.id, pinBtn.dataset.title, pinBtn.dataset.source);
+      return;
+    }
+
+    // Remove from queue
+    const removeBtn = e.target.closest('.queue-item-remove');
+    if (removeBtn) {
+      const id = removeBtn.dataset.id;
+      pinnedItems.delete(id);
+      savePinned();
+      updateQueueCount();
+      renderQueueModal();
+      document.querySelectorAll(`.pin-btn[data-id="${id}"]`).forEach(b => b.classList.remove('active'));
+      document.querySelectorAll(`.card[data-id="${id}"]`).forEach(c => c.classList.remove('pinned'));
+      return;
+    }
+
+    // Close on backdrop click
+    if (e.target.classList.contains('modal-overlay')) {
+      document.querySelectorAll('.modal-overlay.active').forEach(m => closeModal(m.id));
+    }
+  });
+
+  // Queue open buttons
+  document.getElementById('headerQueueBtn').addEventListener('click', () => { renderQueueModal(); openModal('queueModal'); });
+  document.getElementById('sectionQueueBtn').addEventListener('click', () => { renderQueueModal(); openModal('queueModal'); });
+  document.getElementById('closeQueueModal').addEventListener('click', () => closeModal('queueModal'));
+
+  // Copy link — header button opens modal with pre-filled URL
+  document.getElementById('headerSendBtn').addEventListener('click', () => {
+    const input = document.getElementById('shareLinkInput');
+    if (input) input.value = window.location.href;
+    openModal('sendModal');
+  });
+  document.getElementById('closeSendModal').addEventListener('click', () => closeModal('sendModal'));
+  document.getElementById('modalCopyBtn').addEventListener('click', () => copyBriefLink('sendModal'));
+
+  // Inline copy link button
+  document.getElementById('inlineCopyBtn').addEventListener('click', () => copyBriefLink(null));
+
+  // Feedback
+  document.getElementById('feedbackSubmit').addEventListener('click', () => {
+    const input = document.getElementById('feedbackInput');
+    if (!input.value.trim()) { toast('Please enter your feedback first.'); input.focus(); return; }
+    toast('Feedback submitted. Thank you.');
+    input.value = '';
+  });
+
+  // Escape key
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') document.querySelectorAll('.modal-overlay.active').forEach(m => closeModal(m.id));
+  });
+
+  // Sticky header shadow
+  window.addEventListener('scroll', () => {
+    document.getElementById('siteHeader').classList.toggle('scrolled', window.scrollY > 4);
+  }, { passive: true });
+
+  // ─────────────────────────────────────────
+  // INIT
+  // ─────────────────────────────────────────
+
+  loadPinned();
+  updateQueueCount();
+  renderDate();
+  loadBriefData(); // fetches data.json; falls back to loading state message if unavailable
+
+  </script>
+
+  <!-- ═══════════════════════════════════════ CHAT WIDGET -->
+  <div class="chat-widget" id="chatWidget">
+
+    <!-- Toggle button (always visible) -->
+    <button class="chat-toggle" id="chatToggle" aria-label="Open chat assistant" aria-expanded="false" aria-controls="chatPanel">
+      <svg class="chat-icon-msg" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+      </svg>
+      <svg class="chat-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <span class="chat-toggle-label">Ask me anything</span>
+    </button>
+
+    <!-- Chat panel -->
+    <div class="chat-panel" id="chatPanel" role="dialog" aria-label="StepChange Assistant" aria-modal="false">
+      <div class="chat-header">
+        <div class="chat-header-info">
+          <span class="chat-header-title">StepChange Assistant</span>
+          <span class="chat-header-sub">Powered by Claude</span>
+        </div>
+        <button class="chat-close-btn" id="chatCloseBtn" aria-label="Close chat">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="chat-messages" id="chatMessages" aria-live="polite" aria-atomic="false">
+        <div class="chat-msg chat-msg-assistant">
+          <p>Hi — I'm the StepChange assistant. Ask me anything about the brief, our work on climate risk for banks, or StepChange's positioning in the market.</p>
+        </div>
+      </div>
+
+      <div class="chat-input-area">
+        <textarea
+          class="chat-input"
+          id="chatInput"
+          placeholder="Type your question…"
+          rows="1"
+          aria-label="Chat message"
+        ></textarea>
+        <button class="chat-send" id="chatSend" aria-label="Send message" disabled>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M22 2L11 13M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+  // ─────────────────────────────────────────
+  // CHAT WIDGET
+  // ─────────────────────────────────────────
+  (function () {
+    const widget    = document.getElementById('chatWidget');
+    const toggle    = document.getElementById('chatToggle');
+    const panel     = document.getElementById('chatPanel');
+    const closeBtn  = document.getElementById('chatCloseBtn');
+    const messages  = document.getElementById('chatMessages');
+    const input     = document.getElementById('chatInput');
+    const sendBtn   = document.getElementById('chatSend');
+
+    let history  = [];   // OpenRouter message history
+    let waiting  = false;
+
+    // ── Open / Close ─────────────────────────
+    function openChat() {
+      widget.classList.add('open');
+      toggle.setAttribute('aria-expanded', 'true');
+      input.focus();
+      scrollBottom();
+    }
+
+    function closeChat() {
+      widget.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+
+    toggle.addEventListener('click', () =>
+      widget.classList.contains('open') ? closeChat() : openChat()
+    );
+    closeBtn.addEventListener('click', closeChat);
+
+    // ── Scroll ───────────────────────────────
+    function scrollBottom() {
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    // ── Append message bubble ─────────────────
+    function appendMsg(role, text) {
+      const div = document.createElement('div');
+      div.className = `chat-msg chat-msg-${role}`;
+      const p = document.createElement('p');
+      p.textContent = text;
+      div.appendChild(p);
+      messages.appendChild(div);
+      scrollBottom();
+      return div;
+    }
+
+    // ── Typing indicator ─────────────────────
+    function showTyping() {
+      const div = document.createElement('div');
+      div.id = 'chatTyping';
+      div.className = 'chat-msg chat-msg-assistant chat-typing';
+      div.innerHTML = '<span></span><span></span><span></span>';
+      messages.appendChild(div);
+      scrollBottom();
+    }
+
+    function hideTyping() {
+      const el = document.getElementById('chatTyping');
+      if (el) el.remove();
+    }
+
+    // ── Send ─────────────────────────────────
+    async function send() {
+      const text = input.value.trim();
+      if (!text || waiting) return;
+
+      waiting = true;
+      input.value = '';
+      input.style.height = 'auto';
+      sendBtn.disabled = true;
+
+      appendMsg('user', text);
+      history.push({ role: 'user', content: text });
+
+      showTyping();
+
+      try {
+        const res = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ messages: history }),
+        });
+
+        hideTyping();
+
+        if (!res.ok) {
+          const err = await res.json().catch(() => ({}));
+          console.error('Chat API error:', res.status, err);
+          appendMsg('assistant', 'Something went wrong — try again in a moment.');
+        } else {
+          const data  = await res.json();
+          const reply = data.content || 'Sorry, I couldn\'t get a response.';
+          history.push({ role: 'assistant', content: reply });
+          appendMsg('assistant', reply);
+
+          // Intake complete — submit to proposal endpoint
+          if (data.intakeComplete) {
+            submitIntake(data.intakeData).catch(err => console.error('Proposal submit error:', err));
+          }
+        }
+      } catch (err) {
+        hideTyping();
+        appendMsg('assistant', 'Something went wrong — try again in a moment.');
+        console.error('Chat fetch error:', err);
+      }
+
+      waiting = false;
+      sendBtn.disabled = input.value.trim().length === 0;
+      input.focus();
+    }
+
+    // ── Submit intake ────────────────────────
+    async function submitIntake(intakeData) {
+      try {
+        await fetch('/api/generate-proposal', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ conversation: history, intakeData }),
+        });
+      } catch (err) {
+        console.error('generate-proposal fetch error:', err);
+      }
+    }
+
+    sendBtn.addEventListener('click', send);
+
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        send();
+      }
+    });
+
+    // Enable/disable send button based on input
+    input.addEventListener('input', () => {
+      sendBtn.disabled = input.value.trim().length === 0 || waiting;
+      // Auto-resize
+      input.style.height = 'auto';
+      input.style.height = Math.min(input.scrollHeight, 120) + 'px';
+    });
+
+  }());
+  </script>
+
+</body>
+</html>

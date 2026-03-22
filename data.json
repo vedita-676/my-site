@@ -1,0 +1,142 @@
+{
+  "meta": {
+    "generatedAt": "2026-03-22T13:05:53.827372",
+    "lastUpdated": "1:05 PM"
+  },
+  "policy": [
+    {
+      "id": "policy-1",
+      "area": "ESG Disclosure",
+      "areaSlug": "esg",
+      "title": "SEBI Introduces Key Changes in BRSR Reporting: Value Chain Disclosures Mandatory from FY26",
+      "description": "SEBI mandated ESG value chain disclosures for the top 1,000 listed companies starting FY2025-26, requiring disclosure on key suppliers and customers accounting for 2% or more of procurement or sales. 'Assurance' has been replaced with 'assessment or assurance', with third-party assessments to be conducted under standards developed by the Industry Standards Forum in consultation with SEBI.",
+      "source": "SEBI / KPMG",
+      "date": "Jan 2025",
+      "url": "https://assets.kpmg.com/content/dam/kpmgsites/in/pdf/2025/01/firstnotes-sebi-introduces-certain-key-changes-in-brsr-reporting.pdf"
+    },
+    {
+      "id": "policy-2",
+      "area": "Climate Risk for Banks",
+      "areaSlug": "climate",
+      "title": "RBI Governor Announces RB-CRIS Data System and On-Tap Regulatory Sandbox for Climate Risk",
+      "description": "RBI Governor Sanjay Malhotra, speaking at a March 13, 2025 policy seminar, announced the Reserve Bank–Climate Risk Information System (RB-CRIS) to provide standardised hazard, vulnerability, and exposure datasets for physical and transition risk assessment by regulated entities. He also proposed a dedicated 'On Tap' regulatory sandbox cohort on climate change and sustainable finance, and called for creation of a common pool of bankable climate projects to unblock climate finance flows.",
+      "source": "Reserve Bank of India / BIS",
+      "date": "13 Mar 2025",
+      "url": "https://www.bis.org/review/r250319b.htm"
+    },
+    {
+      "id": "policy-3",
+      "area": "ESG Disclosure",
+      "areaSlug": "esg",
+      "title": "ISSB Issues Targeted Amendments to IFRS S2, Easing Financed Emissions Rules for Banks and Asset Managers",
+      "description": "In December 2025, ISSB issued amendments to IFRS S2 allowing financial institutions to limit Scope 3 Category 15 disclosures to financed emissions only, removing the requirement to use GICS for disaggregating financed emissions, and permitting use of GWP values mandated by local regulators. The amendments are effective for reporting periods beginning on or after 1 January 2027, with early application permitted.",
+      "source": "IFRS Foundation / ISSB",
+      "date": "Dec 2025",
+      "url": "https://www.ifrs.org/news-and-events/news/2025/12/issb-issues-targeted-amendments-ifrs-s2/"
+    },
+    {
+      "id": "policy-4",
+      "area": "Climate Risk for Banks",
+      "areaSlug": "climate",
+      "title": "EU CRR III / CRD VI Embeds Climate and Environmental Risks into Prudential Supervision from January 2026",
+      "description": "The EU's Capital Requirements Regulation and Capital Requirements Directive (CRR III and CRD VI), in effect from January 2026, formally incorporate climate and environmental risks into prudential supervision of financial institutions. UNEP FI frames this as a structural shift from sustainability-as-disclosure to sustainability-as-financial-stability, with bank transition plans now subject to prudential scrutiny alongside capital adequacy reviews.",
+      "source": "European Union / UNEP FI",
+      "date": "Jan 2026",
+      "url": "https://www.unepfi.org/news/from-sustainability-to-stability-transition-plans-enter-the-prudential-agenda/"
+    }
+  ],
+  "competitors": [
+    {
+      "id": "comp-1",
+      "company": "Jupiter Intelligence",
+      "category": "Global Climate Risk",
+      "tags": [
+        "Partnerships"
+      ],
+      "title": "Jupiter Intelligence and ERM Partner to Embed Physical Climate Risk into Investment and Operational Strategy",
+      "description": "Jupiter Intelligence and ERM announced a strategic partnership combining Jupiter's science-driven physical risk analytics (ClimateScore Global, trusted by 50% of the largest US lenders) with ERM's advisory and operational capabilities. The partnership targets manufacturing clients and financial institutions, integrating Jupiter's projections into site-level investment decisions, insurance positioning, and supply chain continuity strategies.",
+      "date": "2025",
+      "url": "https://esgnews.com/erm-jupiter-intelligence-partner-to-turn-physical-climate-risk-into-investment-and-resilience-strategy/"
+    },
+    {
+      "id": "comp-2",
+      "company": "Persefoni",
+      "category": "Global ESG",
+      "tags": [
+        "Partnerships",
+        "Product"
+      ],
+      "title": "Persefoni and First Street Launch Integrated Climate Physical Risk Solution within Carbon Platform",
+      "description": "Persefoni and First Street partnered to embed First Street's location-based physical risk data (covering flood, wildfire, wind, heat, and air quality) directly into the Persefoni carbon accounting platform. The integration enables enterprises to access climate risk scores alongside carbon accounting in a single workflow, targeting the convergence of physical risk management and transition planning for corporates and financial institutions.",
+      "date": "2024",
+      "url": "https://www.persefoni.com/blog/persefoni-first-street-climate-risk-solution"
+    },
+    {
+      "id": "comp-3",
+      "company": "Moody's / MSCI",
+      "category": "FI Data",
+      "tags": [
+        "Partnerships",
+        "Product"
+      ],
+      "title": "Moody's Closes Standalone ESG Solutions Business, Migrates Customers to MSCI Sustainability Content",
+      "description": "Moody's confirmed it will close its ESG Solutions business as part of its strategic partnership with MSCI, migrating banking, insurance, and corporate customers to MSCI's ESG ratings and sustainability data via the joint ESGView product on Moody's CreditView platform. MSCI ESG Ratings and ESG Controversies are now available through Moody's, effectively consolidating two major FI data incumbents into a single distribution channel.",
+      "date": "2025",
+      "url": "https://www.environmental-finance.com/content/news/moodys-to-close-esg-solutions-business-following-msci-tie-up.html"
+    },
+    {
+      "id": "comp-4",
+      "company": "MSCI",
+      "category": "FI Data",
+      "tags": [
+        "Product"
+      ],
+      "title": "MSCI ESG Ratings 2026 Model Overhaul Will Change Scores for 37% of Issuers, Raising Reporting Burden",
+      "description": "MSCI's 2026 ESG Ratings model update — rolling out in H1 2026 — includes supply chain risk model enhancements, updates to the ESG Industry Materiality Map, and standardised evaluation of sustainability targets. Analysis published on 16 March 2026 warns the overhaul will change ESG scores for approximately 37% of issuers and significantly increase the sustainability reporting data requirements companies must submit to ratings providers.",
+      "date": "16 Mar 2026",
+      "url": "https://esg-investing.com/2026/03/16/the-ratings-overhaul-that-could-add-to-the-sustainability-reporting-burden/"
+    }
+  ],
+  "research": [
+    {
+      "id": "research-1",
+      "bet": "Parametric Insurance",
+      "betSlug": "parametric",
+      "title": "Parametric Insurance",
+      "source": "Climate Policy Initiative (CPI)",
+      "date": "Jan 2026",
+      "description": "CPI's toolkit report documents sovereign parametric risk pool case studies including CCRIF (78 payouts totalling ~$390M, disbursed within 14 days) and Africa Risk Capacity ($125M+ in payouts since 2014). It recommends that financial institutions begin with small parametric pilots in the most climate-exposed lending sectors to test trigger design, and emphasises that fast parametric payouts reduce emergency borrowing by bank clients — the direct business case for lenders.",
+      "url": "https://www.climatepolicyinitiative.org/wp-content/uploads/2026/01/Parametric-Insurance.pdf"
+    },
+    {
+      "id": "research-2",
+      "bet": "Climate Risk for Banks",
+      "betSlug": "climate",
+      "title": "FSB Roadmap for Addressing Financial Risks from Climate Change: 2025 Update",
+      "source": "Financial Stability Board (FSB)",
+      "date": "Jul 2025",
+      "description": "Delivered to G20 Finance Ministers in July 2025, this update reports that the Basel Committee published a voluntary climate risk disclosure framework for banks in June 2025, with jurisdictions invited to consider domestic implementation. The FSB's new analytical framework emphasises forward-looking physical and transition risk monitoring and notes that work to integrate climate-related financial risks into existing risk management frameworks remains uneven across financial institutions globally.",
+      "url": "https://www.fsb.org/2025/07/fsb-roadmap-for-addressing-financial-risks-from-climate-change-2025-update/"
+    },
+    {
+      "id": "research-3",
+      "bet": "Climate Risk for Banks",
+      "betSlug": "climate",
+      "title": "NGFS Publishes Latest Long-Term Climate Macro-Financial Scenarios: GDP Losses 2–4x Prior Estimates",
+      "source": "Network for Greening the Financial System (NGFS)",
+      "date": "May 2025",
+      "description": "The NGFS's latest vintage of long-term macro-financial scenarios finds GDP losses by 2050 could be two to four times greater than previously estimated — rising to 5–15% under Current Policies and 2–7% under Net Zero 2050. The NGFS also released its first-ever short-term scenarios covering near-term financial risk horizons, giving banks a tool for stress testing over the 1–5 year window that credit committees actually price.",
+      "url": "https://www.ngfs.net/en/press-release/ngfs-publishes-latest-long-term-climate-macro-financial-scenarios-climate-risks-assessment"
+    }
+  ],
+  "ourRead": {
+    "headline": "The regulatory floor under Indian banks is rising fast — RBI's RB-CRIS and imminent disclosure mandate put StepChange's climate risk intelligence directly in the path of mandatory demand.",
+    "body": [
+      "This week's signals converge on a single theme: climate risk for financial institutions is moving from voluntary best practice to regulatory obligation across every major jurisdiction, and India is accelerating to close the gap. The RBI, ISSB, EU, and FSB are each tightening disclosure and risk management requirements in reinforcing ways — and StepChange is positioned at the precise intersection where Indian banks will be forced to act.",
+      "The most consequential policy signal is the RBI's March 2025 announcement of RB-CRIS — a standardised hazard, vulnerability, and exposure data system that the central bank is building specifically to support climate risk disclosure by regulated entities. This matters because it confirms the RBI is not waiting for banks to self-organise: it is building the data infrastructure and will mandate disclosures on top of it. RB-CRIS will not do the PD/LGD modelling that StepChange does — it sets the data foundation; StepChange sits one layer above, translating hazard data into the financial metrics credit committees actually use. The sales pitch just got sharper and the timeline just got tighter, because when the disclosure framework drops it will be too late to start the relationship.",
+      "On the competitor side, the Jupiter + ERM partnership and the Persefoni + First Street integration point to the same strategic move playing out globally: physical climate risk data is being bundled into broader advisory and platform workflows. Neither is a direct India competitor, but they signal the direction of travel — standalone physical risk data vendors are losing the distribution war to whoever owns the banking workflow. The Moody's-MSCI consolidation (comp-3) reinforces this: even the largest FI data incumbents are merging distribution to stay relevant. StepChange should be asking who in the Indian banking ecosystem owns the workflow — loan origination, credit risk review, regulatory reporting — where climate risk data would be consumed. That is the partnership to pursue before a global player arrives with a local reseller.",
+      "The CPI's January 2026 parametric insurance report is the strongest research signal for StepChange's third bet. It documents CCRIF's track record of 78 payouts totalling $390M within 14 days and explicitly recommends that financial institutions begin with small parametric pilots in their most climate-exposed lending sectors to test trigger design. This is a direct blueprint for StepChange's offering: the entry point is not 'sell a product' but 'help a bank design and pilot a trigger for their most climate-exposed borrower segment'. That framing lowers the barrier to entry considerably and maps to StepChange's existing climate risk intelligence capability.",
+      "The thing to watch is the timing of RBI's final disclosure framework — Governor Malhotra described it as being 'finalised' in March 2025, meaning it could land any quarter. When it does, the window for banks to build internal capability will compress sharply and demand for vendor solutions will spike. The action now: identify two or three target banks with the most climate-exposed loan books (agriculture, real estate, infrastructure) and lead with RB-CRIS as the regulatory context for the conversation. Being in the room before the mandate lands is worth more than any post-mandate pitch."
+    ]
+  }
+}
