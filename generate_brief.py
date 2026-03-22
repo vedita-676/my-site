@@ -28,61 +28,63 @@ DATA_FILE  = (_site_dir if _site_dir.exists() else SCRIPT_DIR) / "data.json"
 LOG_FILE   = SCRIPT_DIR / "brief.log"
 
 # ─────────────────────────────────────────────────────────────────
-# NEWS API
+# COMPOSIO SEARCH
 # ─────────────────────────────────────────────────────────────────
 
 NEWS_QUERIES = [
-    "RBI OR SEBI OR ISSB OR NGFS OR FSB climate ESG disclosure banks",
-    "Jupiter Intelligence OR First Street OR UpDapt OR Sprih climate ESG risk",
-    "parametric insurance climate OR IFC OR NGFS climate risk report",
+    {"query": "RBI SEBI climate risk ESG disclosure India banks",      "when": "m", "gl": "in"},
+    {"query": "ISSB IFRS FSB NGFS BIS climate disclosure banks",       "when": "m", "gl": "us"},
+    {"query": "Jupiter Intelligence First Street UpDapt Sprih climate ESG", "when": "m"},
+    {"query": "parametric insurance climate risk banks",               "when": "m"},
+    {"query": "IFC World Bank NGFS climate risk report emerging markets", "when": "m"},
 ]
 
 def fetch_news(days: int = 30) -> list[dict]:
-    """Fetch articles from NewsAPI.org for curated queries."""
-    api_key = os.environ.get("NEWS_API_KEY")
+    """Fetch news articles via Composio COMPOSIO_SEARCH_NEWS."""
+    api_key = os.environ.get("COMPOSIO_API_KEY")
     if not api_key:
-        print("ERROR: NEWS_API_KEY not set.", file=sys.stderr)
+        print("ERROR: COMPOSIO_API_KEY not set.", file=sys.stderr)
         sys.exit(1)
 
-    from_date = (datetime.now(timezone.utc) - timedelta(days=days)).strftime("%Y-%m-%d")
+    try:
+        from composio import ComposioToolSet
+    except ImportError:
+        print("ERROR: 'composio-core' not installed. Run: pip install composio-core", file=sys.stderr)
+        sys.exit(1)
+
+    toolset = ComposioToolSet(api_key=api_key)
     items = []
 
-    for query in NEWS_QUERIES:
-        params = urllib.parse.urlencode({
-            "q":        query,
-            "language": "en",
-            "sortBy":   "publishedAt",
-            "pageSize": 20,
-            "from":     from_date,
-            "apiKey":   api_key,
-        })
-        url = f"https://newsapi.org/v2/everything?{params}"
+    for q in NEWS_QUERIES:
         try:
-            req = urllib.request.Request(url, headers={"User-Agent": "StepChangeBriefBot/1.0"})
-            with urllib.request.urlopen(req, timeout=15) as resp:
-                data = json.loads(resp.read())
-            for art in data.get("articles", []):
-                pub_raw = art.get("publishedAt", "")
-                try:
-                    pub = datetime.fromisoformat(pub_raw.replace("Z", "+00:00"))
-                    date_str = pub.strftime("%-d %b %Y")
-                except Exception:
-                    date_str = pub_raw[:10]
+            result = toolset.execute_action(
+                action="COMPOSIO_SEARCH_NEWS",
+                params=q,
+            )
+            articles = []
+            # Handle different response shapes
+            if isinstance(result, dict):
+                articles = result.get("data", result.get("results", result.get("articles", [])))
+            elif isinstance(result, list):
+                articles = result
+
+            for art in articles:
+                if not isinstance(art, dict):
+                    continue
                 items.append({
                     "title":   (art.get("title") or "").strip(),
-                    "url":     (art.get("url") or "").strip(),
-                    "source":  (art.get("source", {}).get("name") or "Unknown"),
-                    "date":    date_str,
-                    "snippet": (art.get("description") or "")[:300].strip(),
+                    "url":     (art.get("link") or art.get("url") or "").strip(),
+                    "source":  (art.get("source") or "Unknown"),
+                    "date":    (art.get("published_at") or art.get("date") or "")[:10],
+                    "snippet": (art.get("snippet") or art.get("description") or "")[:300].strip(),
                 })
         except Exception as e:
-            print(f"  Warning: NewsAPI query failed ({query[:40]}...): {e}", file=sys.stderr)
+            print(f"  Warning: Composio query failed ({q['query'][:40]}...): {e}", file=sys.stderr)
 
     # Deduplicate by URL
-    seen = set()
-    unique = []
+    seen, unique = set(), []
     for item in items:
-        if item["url"] not in seen:
+        if item["url"] and item["url"] not in seen:
             seen.add(item["url"])
             unique.append(item)
     return unique
