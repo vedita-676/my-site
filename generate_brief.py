@@ -32,26 +32,17 @@ LOG_FILE   = SCRIPT_DIR / "brief.log"
 # ─────────────────────────────────────────────────────────────────
 
 FEEDS = [
-    {
-        "label": "policy-india",
-        "url": "https://news.google.com/rss/search?q=RBI+SEBI+climate+risk+ESG+disclosure+India&hl=en-IN&gl=IN&ceid=IN:en",
-    },
-    {
-        "label": "policy-global",
-        "url": "https://news.google.com/rss/search?q=ISSB+IFRS+FSB+NGFS+BIS+climate+risk+banks+disclosure&hl=en&gl=US&ceid=US:en",
-    },
-    {
-        "label": "competitors",
-        "url": "https://news.google.com/rss/search?q=Jupiter+Intelligence+First+Street+UpDapt+Sprih+ESG+climate+risk+fintech&hl=en&gl=US&ceid=US:en",
-    },
-    {
-        "label": "research",
-        "url": "https://news.google.com/rss/search?q=parametric+insurance+climate+World+Bank+IFC+NGFS+Swiss+Re+report&hl=en&gl=US&ceid=US:en",
-    },
-    {
-        "label": "research-india",
-        "url": "https://news.google.com/rss/search?q=climate+risk+ESG+India+banks+NBFC+sustainability+data&hl=en-IN&gl=IN&ceid=IN:en",
-    },
+    # Global policy & regulatory bodies
+    {"label": "policy-global", "url": "https://www.bis.org/rss/index.htm"},
+    {"label": "policy-global", "url": "https://www.fsb.org/feed/"},
+    {"label": "research",      "url": "https://www.worldbank.org/en/topic/climatechange/rss.xml"},
+    # Indian financial news (ESG, climate, banking regulation)
+    {"label": "policy-india",  "url": "https://www.business-standard.com/rss/finance-19.rss"},
+    {"label": "policy-india",  "url": "https://economictimes.indiatimes.com/markets/rssfeeds/1977021501.cms"},
+    # Reuters global business / sustainability
+    {"label": "competitors",   "url": "https://feeds.reuters.com/reuters/businessNews"},
+    # Climate & sustainability news
+    {"label": "research",      "url": "https://www.climatechangenews.com/feed/"},
 ]
 
 # ─────────────────────────────────────────────────────────────────
@@ -69,9 +60,11 @@ def fetch_feeds(days: int = 7) -> list[dict]:
     cutoff = datetime.now(timezone.utc) - timedelta(days=days)
     items = []
 
+    headers = {"User-Agent": "Mozilla/5.0 (compatible; StepChangeBriefBot/1.0)"}
+
     for feed_def in FEEDS:
         try:
-            feed = feedparser.parse(feed_def["url"])
+            feed = feedparser.parse(feed_def["url"], request_headers=headers)
             for entry in feed.entries:
                 # Parse published date
                 pub = None
@@ -276,7 +269,7 @@ def validate(data: dict) -> list[str]:
 def main():
     parser = argparse.ArgumentParser(description="Generate StepChange Daily Brief data.json")
     parser.add_argument("--dry-run", action="store_true", help="Print JSON without writing to file")
-    parser.add_argument("--days", type=int, default=7, help="How many days back to fetch news (default: 7)")
+    parser.add_argument("--days", type=int, default=30, help="How many days back to fetch news (default: 30)")
     args = parser.parse_args()
 
     now = datetime.now()
