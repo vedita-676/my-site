@@ -14,7 +14,7 @@ Schedule (cron example — runs 7am daily):
   0 7 * * * cd /path/to/cohort-2-day-2 && python generate_brief.py >> brief.log 2>&1
 """
 
-import subprocess, json, re, sys, argparse
+import subprocess, json, re, sys, argparse, os
 from datetime import datetime
 from pathlib import Path
 
@@ -155,33 +155,48 @@ QUALITY RULES:
 # CLAUDE RUNNER
 # ─────────────────────────────────────────────────────────────────
 
-def run_claude(prompt: str, timeout: int = 360) -> str:
-    """Call Claude CLI with WebSearch enabled. Returns raw stdout."""
+def run_claude(prompt: str, timeout: int = 240) -> str:
+    """Call Anthropic API directly with web search. No CLI required."""
     try:
-        result = subprocess.run(
-            [
-                "claude", "-p", prompt,
-                "--dangerously-skip-permissions",
-                "--allowedTools", "WebSearch,WebFetch",
-            ],
-            capture_output=True,
-            text=True,
-            timeout=timeout,
-            cwd=str(SCRIPT_DIR),
+        import anthropic
+    except ImportError:
+        print("ERROR: 'anthropic' package not installed. Run: pip install anthropic", file=sys.stderr)
+        sys.exit(1)
+
+    client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
+    messages = [{"role": "user", "content": prompt}]
+
+    for _ in range(20):  # max turns safety limit
+        response = client.messages.create(
+            model="claude-opus-4-5",
+            max_tokens=8000,
+            tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 15}],
+            messages=messages,
         )
-        output = result.stdout.strip()
-        if not output and result.stderr.strip():
-            output = result.stderr.strip()
-        return output
-    except subprocess.TimeoutExpired:
-        print(f"ERROR: Claude timed out after {timeout}s", file=sys.stderr)
-        sys.exit(1)
-    except FileNotFoundError:
-        print("ERROR: 'claude' CLI not found. Is Claude Code installed?", file=sys.stderr)
-        sys.exit(1)
-    except Exception as e:
-        print(f"ERROR running Claude: {e}", file=sys.stderr)
-        sys.exit(1)
+
+        # Collect any text in this response
+        text = ""
+        for block in response.content:
+            if hasattr(block, "text"):
+                text += block.text
+
+        if response.stop_reason == "end_turn":
+            return text
+
+        # Tool use — add assistant turn and continue
+        messages.append({"role": "assistant", "content": response.content})
+
+        tool_results = [
+            {"type": "tool_result", "tool_use_id": block.id, "content": ""}
+            for block in response.content
+            if block.type == "tool_use"
+        ]
+        if tool_results:
+            messages.append({"role": "user", "content": tool_results})
+        else:
+            return text  # no tool calls and not end_turn — return what we have
+
+    return ""
 
 # ─────────────────────────────────────────────────────────────────
 # JSON EXTRACTION

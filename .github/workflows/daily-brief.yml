@@ -18,13 +18,14 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install Claude CLI
-        run: npm install -g @anthropic-ai/claude-code
+      - name: Install dependencies
+        run: pip install anthropic
 
       - name: Generate brief
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python3 generate_brief.py
+        timeout-minutes: 10
 
       - name: Commit and push if changed
         run: |
