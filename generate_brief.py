@@ -163,40 +163,46 @@ def run_claude(prompt: str, timeout: int = 240) -> str:
         print("ERROR: 'anthropic' package not installed. Run: pip install anthropic", file=sys.stderr)
         sys.exit(1)
 
-    client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
-    messages = [{"role": "user", "content": prompt}]
+    try:
+        client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
+        messages = [{"role": "user", "content": prompt}]
 
-    for _ in range(20):  # max turns safety limit
-        response = client.messages.create(
-            model="claude-opus-4-5",
-            max_tokens=8000,
-            tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 15}],
-            messages=messages,
-        )
+        for _ in range(20):  # max turns safety limit
+            response = client.beta.messages.create(
+                model="claude-opus-4-5",
+                max_tokens=8000,
+                tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 15}],
+                messages=messages,
+                betas=["web-search-2025-03-05"],
+            )
 
-        # Collect any text in this response
-        text = ""
-        for block in response.content:
-            if hasattr(block, "text"):
-                text += block.text
+            # Collect any text in this response
+            text = ""
+            for block in response.content:
+                if hasattr(block, "text"):
+                    text += block.text
 
-        if response.stop_reason == "end_turn":
-            return text
+            if response.stop_reason == "end_turn":
+                return text
 
-        # Tool use — add assistant turn and continue
-        messages.append({"role": "assistant", "content": response.content})
+            # Tool use — add assistant turn and continue
+            messages.append({"role": "assistant", "content": response.content})
 
-        tool_results = [
-            {"type": "tool_result", "tool_use_id": block.id, "content": ""}
-            for block in response.content
-            if block.type == "tool_use"
-        ]
-        if tool_results:
-            messages.append({"role": "user", "content": tool_results})
-        else:
-            return text  # no tool calls and not end_turn — return what we have
+            tool_results = [
+                {"type": "tool_result", "tool_use_id": block.id, "content": ""}
+                for block in response.content
+                if block.type == "tool_use"
+            ]
+            if tool_results:
+                messages.append({"role": "user", "content": tool_results})
+            else:
+                return text  # no tool calls and not end_turn — return what we have
 
-    return ""
+        return ""
+
+    except Exception as e:
+        print(f"ERROR: Anthropic API call failed: {e}", file=sys.stderr)
+        sys.exit(1)
 
 # ─────────────────────────────────────────────────────────────────
 # JSON EXTRACTION
