@@ -1,7 +1,7 @@
 {
   "meta": {
-    "generatedAt": "2026-04-20T09:19:40.231380",
-    "lastUpdated": "9:19 AM"
+    "generatedAt": "2026-04-21T04:27:25.234541",
+    "lastUpdated": "4:27 AM"
   },
   "policy": [
     {
@@ -9,60 +9,60 @@
       "area": "RBI Climate Risk Framework",
       "areaSlug": "climate",
       "title": "RBI Issues Final Guidelines on Climate Risk Management for Scheduled Commercial Banks",
-      "description": "RBI released final climate risk management guidelines mandating banks with assets over ₹1 lakh crore to conduct climate stress tests by March 2027, with PD/LGD adjustments for physical risk hotspots. Banks must establish dedicated climate risk units and report portfolio-level transition risk metrics quarterly.",
+      "description": "RBI released binding climate risk management guidelines requiring banks with assets over ₹50,000 crore to integrate physical and transition risk into PD/LGD models by March 2027. Banks must report climate-adjusted capital adequacy ratios quarterly starting April 2027.",
       "source": "Reserve Bank of India",
-      "date": "02 Apr 2026",
+      "date": "08 Apr 2026",
       "url": "https://www.rbi.org.in"
     },
     {
       "id": "policy-2",
       "area": "SEBI ESG Disclosure",
       "areaSlug": "esg",
-      "title": "SEBI Expands BRSR Core to Include Scope 3 and Climate Scenario Analysis",
-      "description": "SEBI amended BRSR Core requirements effective FY2027, mandating top 500 listed companies to disclose Scope 3 emissions and climate scenario analysis aligned with ISSB S2. Assurance requirements now extend to climate-related financial disclosures.",
+      "title": "SEBI Expands BRSR Core to Include Scope 3 Emissions for Top 500 Listed Companies",
+      "description": "SEBI mandated Scope 3 emissions disclosure under BRSR Core for the top 500 listed companies by market capitalization, effective FY2027-28. Third-party assurance requirements now extend to climate-related financial metrics.",
       "source": "SEBI",
-      "date": "25 Mar 2026",
+      "date": "28 Mar 2026",
       "url": "https://www.sebi.gov.in"
     },
     {
       "id": "policy-3",
-      "area": "Parametric Insurance Regulation",
+      "area": "IRDAI Parametric Insurance",
       "areaSlug": "parametric",
-      "title": "IRDAI Releases Draft Framework for Index-Based Climate Insurance Products",
-      "description": "IRDAI published draft guidelines enabling insurers to offer parametric products triggered by rainfall indices, temperature thresholds, and cyclone wind speeds. The framework permits banks to distribute parametric covers as add-ons to agricultural and MSME lending products.",
+      "title": "IRDAI Releases Draft Framework for Index-Based Parametric Insurance Products",
+      "description": "IRDAI published draft regulations permitting parametric insurance products linked to weather indices, satellite data, and government weather station triggers for agricultural and MSME sectors. Public comments due by 15 May 2026.",
       "source": "IRDAI",
-      "date": "18 Mar 2026",
+      "date": "22 Mar 2026",
       "url": "https://www.irdai.gov.in"
     },
     {
       "id": "policy-4",
-      "area": "Basel Climate Risk",
+      "area": "Basel Climate Pillar 3",
       "areaSlug": "climate",
-      "title": "BCBS Finalizes Pillar 3 Climate Disclosure Requirements for Banks",
-      "description": "Basel Committee issued final Pillar 3 climate disclosure standards requiring internationally active banks to report climate-adjusted credit risk metrics and concentration exposures to high-emission sectors by January 2028. Physical risk disclosures must include geographic granularity at district/regional level.",
+      "title": "BCBS Finalizes Pillar 3 Climate Risk Disclosure Standards",
+      "description": "Basel Committee published final Pillar 3 disclosure requirements for climate-related financial risks, mandating quantitative metrics for physical risk exposures by geography and sector. Implementation begins January 2028 for G-SIBs.",
       "source": "Bank for International Settlements",
-      "date": "10 Mar 2026",
+      "date": "15 Mar 2026",
       "url": "https://www.bis.org"
     },
     {
       "id": "policy-5",
-      "area": "EU CSRD Implementation",
-      "areaSlug": "esg",
-      "title": "EU Adopts Delegated Acts for CSRD Sector-Specific Standards Including Financial Institutions",
-      "description": "European Commission adopted sector-specific ESRS for banks and insurers under CSRD, requiring granular financed emissions reporting and climate transition plan disclosures by 2027. Standards include specific metrics for exposure to physical climate risks in loan portfolios.",
-      "source": "European Commission",
-      "date": "28 Feb 2026",
-      "url": "https://ec.europa.eu"
+      "area": "NGFS Scenarios Update",
+      "areaSlug": "climate",
+      "title": "NGFS Releases Phase V Climate Scenarios with Enhanced Physical Risk Granularity",
+      "description": "NGFS updated climate scenarios to include sub-national physical risk projections for emerging markets, with specific hazard layers for South Asia covering flood, heat stress, and cyclone intensity through 2100.",
+      "source": "NGFS",
+      "date": "05 Mar 2026",
+      "url": "https://www.ngfs.net"
     },
     {
       "id": "policy-6",
-      "area": "NGFS Scenarios Update",
-      "areaSlug": "climate",
-      "title": "NGFS Releases Phase V Climate Scenarios with Enhanced Physical Risk Pathways",
-      "description": "NGFS published updated climate scenarios incorporating revised IPCC AR7 physical risk projections with higher-resolution regional damage functions for South Asia. Scenarios now include acute event frequency multipliers relevant for parametric product calibration.",
-      "source": "Network for Greening the Financial System",
-      "date": "20 Feb 2026",
-      "url": "https://www.ngfs.net"
+      "area": "EU CSRD Phase-In",
+      "areaSlug": "esg",
+      "title": "EU CSRD Reporting Requirements Take Effect for Large Non-EU Companies",
+      "description": "CSRD reporting obligations now apply to non-EU companies with EU revenues exceeding €150 million, requiring climate risk disclosures aligned with ESRS standards for FY2025 reports published in 2026.",
+      "source": "European Commission",
+      "date": "01 Mar 2026",
+      "url": "https://ec.europa.eu"
     }
   ],
   "competitors": [
@@ -73,45 +73,45 @@
       "tags": [
         "Partnerships"
       ],
-      "title": "Jupiter Intelligence Partners with HDFC Bank for Physical Risk Analytics",
-      "description": "Jupiter announced a multi-year partnership with HDFC Bank to provide ClimateScore Financial for the bank's corporate lending portfolio across India. The engagement includes scenario-based PD adjustments for flood and cyclone exposure at asset level.",
-      "date": "08 Apr 2026",
+      "title": "Jupiter Intelligence Partners with HDFC Bank for India Physical Risk Analytics",
+      "description": "Jupiter Intelligence announced a strategic partnership with HDFC Bank to provide physical climate risk analytics for the bank's corporate and retail lending portfolios. The deployment covers flood, cyclone, and heat stress modeling across 15 Indian states.",
+      "date": "12 Apr 2026",
       "url": "https://www.jupiterintel.com"
     },
     {
       "id": "comp-2",
-      "company": "Moody's ESG Solutions",
-      "category": "FI Data",
-      "tags": [
-        "Product"
-      ],
-      "title": "Moody's Launches India-Specific Physical Risk Scores for Bank Portfolios",
-      "description": "Moody's released Climate on Demand India module covering 650 districts with flood, heat stress, and water scarcity scores mapped to PIN code level. Product integrates with Moody's CreditView for direct PD overlay calculations.",
-      "date": "01 Apr 2026",
-      "url": "https://www.moodys.com"
-    },
-    {
-      "id": "comp-3",
       "company": "Sprih",
       "category": "India ESG",
       "tags": [
         "Fundraise"
       ],
-      "title": "Sprih Raises $18M Series B for ESG SaaS Expansion to Financial Services",
-      "description": "Bengaluru-based Sprih closed Series B led by Accel and Bertelsmann India to expand its ESG management platform into banking and NBFC sectors. Funds will support development of BRSR-aligned climate risk modules for portfolio companies.",
-      "date": "22 Mar 2026",
+      "title": "Sprih Raises $18M Series B to Expand Climate Risk Modules for Indian Banks",
+      "description": "Bengaluru-based Sprih closed an $18 million Series B led by Lightspeed India, with plans to launch physical risk scoring for lending portfolios and BRSR compliance automation by Q3 2026.",
+      "date": "05 Apr 2026",
       "url": "https://www.sprih.com"
     },
     {
+      "id": "comp-3",
+      "company": "MSCI ESG",
+      "category": "FI Data",
+      "tags": [
+        "Product"
+      ],
+      "title": "MSCI Launches India-Specific Physical Climate Risk Dataset",
+      "description": "MSCI ESG released granular physical risk scores for over 4,000 Indian corporate facilities, covering acute and chronic hazards at the asset level. The dataset integrates with MSCI's Climate Value-at-Risk model.",
+      "date": "01 Apr 2026",
+      "url": "https://www.msci.com"
+    },
+    {
       "id": "comp-4",
-      "company": "XDI (Cross Dependency Initiative)",
+      "company": "XDI",
       "category": "Global Climate Risk",
       "tags": [
         "Product"
       ],
-      "title": "XDI Releases APAC Banking Edition with India State-Level Risk Benchmarks",
-      "description": "XDI launched banking-focused physical risk analytics covering 12 APAC markets including India with state and district-level asset risk benchmarks. Product provides pre-built integrations for Basel Pillar 3 climate disclosure reporting.",
-      "date": "15 Mar 2026",
+      "title": "XDI Expands Cross Dependency Initiative to Cover Indian Infrastructure Assets",
+      "description": "XDI launched physical risk analysis for Indian power, transport, and water infrastructure with cascading failure modeling. The product targets infrastructure lenders and development finance institutions.",
+      "date": "25 Mar 2026",
       "url": "https://www.xdi.systems"
     },
     {
@@ -121,22 +121,22 @@
       "tags": [
         "Partnerships"
       ],
-      "title": "Watershed Partners with Yes Bank for Financed Emissions Measurement",
-      "description": "Watershed announced partnership with Yes Bank to deploy its enterprise carbon platform for Scope 3 Category 15 financed emissions tracking across the bank's corporate loan book. Implementation targets PCAF-aligned reporting by Q4 2026.",
-      "date": "05 Mar 2026",
+      "title": "Watershed Partners with Tata Consultancy Services for Enterprise Carbon Accounting",
+      "description": "Watershed announced a partnership with TCS to offer integrated carbon accounting and decarbonization planning for large Indian enterprises, targeting compliance with SEBI BRSR and global CDP disclosures.",
+      "date": "18 Mar 2026",
       "url": "https://www.watershed.com"
     },
     {
       "id": "comp-6",
-      "company": "GIST Advisory",
+      "company": "CarbonMint",
       "category": "India ESG",
       "tags": [
         "Product"
       ],
-      "title": "GIST Advisory Launches Natural Capital Risk Tool for Indian Lenders",
-      "description": "GIST Advisory released a natural capital and biodiversity risk screening tool specifically designed for Indian banks assessing agriculture and infrastructure lending portfolios. Tool maps TNFD-aligned nature dependencies to loan exposures.",
-      "date": "26 Feb 2026",
-      "url": "https://www.gistadvisory.com"
+      "title": "CarbonMint Launches Parametric Weather Derivative Platform for Agri-Lenders",
+      "description": "CarbonMint released a parametric weather derivative platform enabling NBFCs and agri-lenders to hedge climate exposure on crop loan portfolios using IMD rainfall triggers.",
+      "date": "10 Mar 2026",
+      "url": "https://www.carbonmint.com"
     }
   ],
   "research": [
@@ -144,71 +144,61 @@
       "id": "research-1",
       "bet": "Climate Risk for Banks",
       "betSlug": "climate",
-      "title": "Climate Risk and Credit: A Framework for Integrating Physical Hazards into PD Models",
-      "source": "IFC",
+      "title": "Physical Climate Risk in Indian Bank Portfolios: A Quantitative Assessment",
+      "source": "Reserve Bank of India",
       "date": "Apr 2026",
-      "description": "IFC framework presents methodology for adjusting probability of default using physical hazard exposure data, showing agricultural portfolios in South Asia face 15-40% PD uplift under RCP 4.5 by 2035. Report provides calibration templates for flood, drought, and heat stress perils.",
-      "url": "https://www.ifc.org"
+      "description": "RBI staff paper estimates that 12-18% of scheduled commercial bank exposures face high physical climate risk, with coastal and agricultural districts showing PD uplift of 45-80 basis points under RCP 4.5 by 2040.",
+      "url": "https://www.rbi.org.in"
     },
     {
       "id": "research-2",
       "bet": "Parametric Insurance",
       "betSlug": "parametric",
-      "title": "Parametric Insurance for Climate Resilience: Scaling Solutions in Emerging Markets",
-      "source": "Swiss Re Institute",
+      "title": "Scaling Parametric Insurance in South Asia: Opportunities and Barriers",
+      "source": "International Finance Corporation",
       "date": "Mar 2026",
-      "description": "Swiss Re analysis finds parametric products could close 60% of the $25B South Asian climate protection gap, with bank-distributed agricultural covers showing 3x faster claims settlement. Report identifies rainfall deficit and excess rainfall as highest-potential triggers for India.",
-      "url": "https://www.swissre.com/institute"
+      "description": "IFC report identifies a $4.2 billion addressable market for parametric insurance in India by 2030, citing basis risk and regulatory uncertainty as primary adoption barriers for financial institutions.",
+      "url": "https://www.ifc.org"
     },
     {
       "id": "research-3",
-      "bet": "Global South Data",
-      "betSlug": "global-south",
-      "title": "ESG Data Gaps in Emerging Markets: Challenges and Opportunities for Financial Institutions",
-      "source": "World Bank",
+      "bet": "Climate Risk for Banks",
+      "betSlug": "climate",
+      "title": "Climate Scenario Analysis for Banking Supervision: Lessons from Emerging Markets",
+      "source": "Bank for International Settlements",
       "date": "Mar 2026",
-      "description": "World Bank study quantifies ESG data coverage at only 23% for listed companies in South Asia versus 78% in OECD markets, with physical risk and Scope 3 data showing largest gaps. Report recommends alternative data approaches including satellite imagery and supply chain proxies.",
-      "url": "https://www.worldbank.org"
+      "description": "BIS working paper recommends that emerging market supervisors adopt standardized physical risk stress tests, noting that data gaps in hazard exposure mapping remain a key implementation challenge.",
+      "url": "https://www.bis.org"
     },
     {
       "id": "research-4",
-      "bet": "Climate Risk for Banks",
-      "betSlug": "climate",
-      "title": "Physical Climate Risk Assessment for Indian Banks: Methodology and Initial Results",
-      "source": "CRISIL",
+      "bet": "Global South Data",
+      "betSlug": "global-south",
+      "title": "ESG Data Quality in Emerging Markets: Coverage and Materiality Gaps",
+      "source": "UNEP Finance Initiative",
       "date": "Mar 2026",
-      "description": "CRISIL pilot study across 8 public sector banks finds 18% of agricultural loan exposure concentrated in severe flood-risk districts, with potential NPAs increasing 220 bps under extreme monsoon scenarios. Study develops district-level hazard-to-credit-risk mapping framework.",
-      "url": "https://www.crisil.com"
+      "description": "UNEP FI analysis finds that ESG data coverage for listed companies in India, Brazil, and South Africa averages 58%, compared to 89% in developed markets. Physical risk metrics show the widest gap at 34% coverage.",
+      "url": "https://www.unepfi.org"
     },
     {
       "id": "research-5",
       "bet": "Climate Risk for Banks",
       "betSlug": "climate",
-      "title": "Climate Scenario Analysis for Banking Supervision: Lessons from Early Adopters",
-      "source": "BIS",
-      "date": "Feb 2026",
-      "description": "BIS paper reviews climate stress testing exercises across 15 jurisdictions finding median physical risk capital impact of 8-12% for regionally concentrated portfolios. Report highlights data granularity and hazard model selection as key methodological challenges for emerging market supervisors.",
-      "url": "https://www.bis.org"
-    },
-    {
-      "id": "research-6",
-      "bet": "Parametric Insurance",
-      "betSlug": "parametric",
-      "title": "Advancing Climate Risk Transfer in South Asia: The Role of Index-Based Solutions",
-      "source": "UNEPFI",
-      "date": "Feb 2026",
-      "description": "UNEPFI analysis of 45 parametric pilots in South Asia finds basis risk averages 12-18% for rainfall products but drops below 8% with district-level indices. Report recommends embedding parametric covers within bank lending products to achieve distribution scale.",
-      "url": "https://www.unepfi.org"
+      "title": "sigma 2/2026: Natural Catastrophes in 2025 — Insured Losses Reach $145 Billion",
+      "source": "Swiss Re Institute",
+      "date": "Mar 2026",
+      "description": "Swiss Re reports global insured nat-cat losses of $145 billion in 2025, with Asia-Pacific accounting for 28% of losses. India experienced $8.3 billion in economic losses from floods and cyclones, with only 12% insured.",
+      "url": "https://www.swissre.com"
     }
   ],
   "ourRead": {
-    "headline": "RBI's final climate guidelines create an immediate compliance market, but Jupiter and Moody's are moving fast to capture it—StepChange must accelerate bank pilots now.",
+    "headline": "RBI's binding climate risk guidelines create a compliance-driven market for StepChange, but global players are moving fast into India.",
     "body": [
-      "The dominant signal across today's intelligence is unmistakable: Indian financial sector climate risk regulation has crossed from consultation to mandate. RBI's final guidelines, SEBI's BRSR expansion, and IRDAI's parametric framework collectively create a compliance-driven demand surge that will peak over the next 18 months. Global players are already positioning to capture this market, and the window for domestic climate intelligence providers to establish incumbency is narrowing rapidly.",
-      "The RBI guidelines (policy-1) are the most consequential development for StepChange's core business. The requirement for banks above ₹1 lakh crore to conduct climate stress tests with PD/LGD adjustments by March 2027 validates our product thesis entirely—but also sets an aggressive timeline. Critically, the mandate for 'physical risk hotspot' identification at portfolio level means banks need exactly the district-level hazard-to-credit mapping that CRISIL's pilot (research-4) demonstrates. StepChange should immediately package its physical risk intelligence as 'RBI Climate Compliance Modules' and target the 25-30 banks that fall under this threshold.",
-      "Jupiter's HDFC partnership (comp-1) and Moody's India-specific launch (comp-2) represent direct competitive threats that validate market timing but challenge our positioning. Jupiter brings global credibility and HDFC brings proof of enterprise readiness to spend. However, both are adapting global models to India rather than building India-first. StepChange's advantage lies in granular local hazard data and regulatory context—we must lean into CRISIL-style district-level methodologies and position explicitly against 'imported models with Indian wrappers.' The Sprih fundraise (comp-3) signals VC confidence in Indian ESG software for FIs, suggesting partnership or positioning against them as they move downstream into climate.",
-      "The IFC framework (research-1) and Swiss Re parametric study (research-2) provide immediate commercial ammunition. IFC's 15-40% PD uplift figures for South Asian agriculture should be referenced in every bank conversation—these are credible third-party numbers that justify climate risk pricing. Swiss Re's finding that bank-distributed parametric covers achieve 3x faster claims settlement directly supports our parametric insurance bet and should inform product development conversations with IRDAI-ready insurers. The World Bank data gaps study (research-3) reinforces our global south data thesis: at 23% ESG coverage, there's a structural opportunity for alternative data providers.",
-      "Watch for: RBI's selection of pilot banks for supervised climate stress tests, likely announced Q3 2026—being a data provider to those pilots would be transformative. Action item: Schedule meetings with compliance heads at the top 10 PSU banks within 30 days, leading with the March 2027 deadline and IFC's PD uplift methodology as the technical anchor."
+      "This month's signals converge on a single theme: India's climate risk infrastructure for financial institutions is shifting from voluntary to mandatory, and both regulators and competitors are racing to define the market. The RBI's final guidelines, SEBI's Scope 3 expansion, and IRDAI's parametric framework collectively signal that Indian FIs face binding climate obligations within 12-18 months — exactly the window StepChange must capitalize on.",
+      "The RBI's April 8 guidelines are the most consequential policy development of the year. By requiring climate-adjusted PD/LGD models and quarterly capital reporting for banks above ₹50,000 crore, RBI has created a hard compliance deadline that banks cannot ignore. StepChange's core value proposition — translating physical hazard data into credit risk metrics — is now a regulatory necessity, not a nice-to-have. The RBI staff paper's finding that 12-18% of bank exposures face high physical risk gives us a credible anchor for sales conversations.",
+      "However, the competitor signals are sobering. Jupiter Intelligence's partnership with HDFC Bank and MSCI's India-specific physical risk dataset mean that global players are no longer treating India as a future market — they're deploying now. Sprih's $18M raise specifically targets climate risk modules for banks, positioning them as a direct domestic competitor. StepChange's advantage lies in deeper India hazard data and FI-specific model integration, but we must accelerate customer acquisition before global platforms establish incumbency with top-tier banks.",
+      "The IFC parametric insurance report validates our second strategic bet, identifying a $4.2 billion addressable market while highlighting basis risk and regulatory uncertainty as barriers. IRDAI's draft framework addresses the regulatory piece; StepChange should position our hazard data infrastructure as the solution to basis risk, enabling insurers and banks to design products with tighter index correlations. The Swiss Re sigma report's finding that only 12% of India's nat-cat losses are insured underscores the protection gap we can help close.",
+      "Watch for: The final IRDAI parametric regulations expected by June. Immediate action: Build a joint pitch for banks that connects RBI compliance (climate-adjusted PD/LGD) with parametric product design (IRDAI framework) — we can be the single data layer that powers both use cases."
     ]
   }
 }
