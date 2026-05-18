@@ -1,8 +1,5 @@
 name: Daily Brief
 
-on:
-  schedule:
-    - cron: '30 1 * * *'   # 7:00 AM IST daily
   workflow_dispatch:         # manual trigger from GitHub Actions UI
 
 jobs:
